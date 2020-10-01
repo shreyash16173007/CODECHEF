@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define mod 1000000007
+int main(){
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int n,k;
+        cin>>n>>k;
+        vector<int>ar(n+1,0);
+        while(k--)
+        {
+            int a;
+            cin>>a;
+            ar[a]=1;
+        }
+        vector<int>dp(n+1,0);
+        dp[1]=1;dp[0]=1;
+        for(int i=2;i<=n;i++)
+        {
+            if(!ar[i-1])
+            dp[i]=(dp[i]%mod+dp[i-1]%mod)%mod;
+             if((i-2>=0)&&(!ar[i-2]))
+            dp[i]=(dp[i]%mod+dp[i-2]%mod)%mod;
+            if((i-3>=0)&&(!ar[i-3]))
+             dp[i]=(dp[i]%mod+dp[i-3]%mod)%mod;
+        }
+        cout<<dp[n]<<endl;
+    }
+}
